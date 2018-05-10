@@ -35,7 +35,8 @@ public class Generator {
 	
 	public static void main(String[] args) throws Exception{
 		Generator g = new Generator();
-		g.gen("user_info","采购单项/调拨单项","wang");
+		g.gen("user_info","用戶信息","user","wang");
+		g.gen("order_info","订单信息","order","wang");
 		System.out.println("模版文件生成完毕……");
 	}
 
@@ -125,7 +126,7 @@ public class Generator {
 	 * @param tableName 要声称映射文件和实体类的表名称
 	 * @throws Exception
 	 */
-	public void gen(String tableName,String info,String uname) throws Exception{
+	public void gen(String tableName,String info, String model_package_name,String uname) throws Exception{
 		Configuration cfg = new Configuration(Configuration.VERSION_2_3_21);
 		
 		String outRoot = properties.getProperty("outRoot");
@@ -145,6 +146,7 @@ public class Generator {
         root.put("className", t.getNameUpper());
         root.put("classNameLower", t.getName());
         root.put("package", basepackage);
+        root.put("model_package_name", model_package_name);
         root.put("date", sm_date.format(new Date()));
         root.put("year", sm_year.format(new Date()));
 		
